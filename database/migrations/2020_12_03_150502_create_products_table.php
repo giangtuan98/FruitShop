@@ -20,10 +20,11 @@ class CreateProductsTable extends Migration
             $table->string('unit');
             $table->bigInteger('category_id')->unsigned();
             $table->bigInteger('promotion_price')->unsigned();
-            $table->tinyInteger('promotion_percent')->unsigned();
+            // $table->tinyInteger('promotion_percent')->unsigned();
             $table->date('promotion_start_date');
             $table->date('promotion_end_date');
-            $table->text('description');
+            $table->text('description')->nullable();
+            $table->string('image');
             $table->softDeletes();
             $table->timestamps();
         });
