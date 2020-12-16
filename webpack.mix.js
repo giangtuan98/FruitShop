@@ -11,7 +11,7 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        //
-    ]);
+mix.copy('resources/Template/shop/css', 'public/css')
+.copy('resources/Template/shop/js', 'public/js')
+.copy('resources/Template/shop/fonts', 'public/fonts')
+.copy('resources/Template/shop/img', 'public/img');
