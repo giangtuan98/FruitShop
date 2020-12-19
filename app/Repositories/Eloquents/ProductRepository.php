@@ -12,4 +12,14 @@ class ProductRepository extends RepositoryAbstract implements ProductRepositoryI
     {
         $this->model = $model;
     }
+
+    public function hotProduct()
+    {
+        return $this->model->hotProduct()->get();
+    }
+
+    public function comingProduct()
+    {
+        return $this->model->comingProduct()->get();
+    }
 }

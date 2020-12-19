@@ -43,7 +43,9 @@
   <script src="js/validate/validate.min.js"></script>
   <script src="js/bootstrap_select/bootstrap-select.min.js"></script>
   <script src="js/slick-lightbox/slick-lightbox.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4BYcbdOVz2fyOAJsXXljYqDWpknhq-58"></script>
+  {{-- <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4BYcbdOVz2fyOAJsXXljYqDWpknhq-58"></script>
+  --}}
   <script src="js/common.js"></script>
 </body>
 

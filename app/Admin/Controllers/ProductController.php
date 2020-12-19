@@ -81,6 +81,9 @@ class ProductController extends AdminController
         $show->field('promotion_start_date', __('Promotion start date'));
         $show->field('promotion_end_date', __('Promotion end date'));
         $show->field('description', __('Description'));
+        $show->field('is_new', __('New'));
+        $show->field('is_hot', __('Hot'));
+        $show->field('quantity', __('Quantity'));
         $show->field('deleted_at', __('Deleted at'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
@@ -110,7 +113,10 @@ class ProductController extends AdminController
         $form->textarea('description', __('Description'));
         $form->image('image', __('Image'));
         $form->multipleImage('images', __('Gallery Image'))->pathColumn('url')->removable();
-
+        $form->switch('is_new', 'New product')->default(true);
+        $form->switch('is_hot', 'Hot')->default(false);
+        $form->switch('is_coming_soon', 'Is coming soon')->default(false);
+        $form->number('quantity', 'Quantity')->default(false);
         return $form;
     }
 
