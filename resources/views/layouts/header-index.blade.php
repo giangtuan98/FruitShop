@@ -1,9 +1,4 @@
-@php
-$cart = session('cart');
-$totalPrice = isset($cart['total']) ? number_format($cart['total']) : 0;
-@endphp
 <header class="header">
-  <!-- MAIN MENU -->
   <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
       <a class="navbar-brand" href="index-2.html"><img src="img/logo-big.png" alt="logo"></a>
@@ -14,13 +9,13 @@ $totalPrice = isset($cart['total']) ? number_format($cart['total']) : 0;
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link menu-nav-link" href="{{ route('home') }}">Home</a>
+            <a class="nav-link menu-nav-link" href="#welcome">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link menu-nav-link" href="{{ route('shop') }}">Shop</a>
+            <a class="nav-link menu-nav-link" href="#about">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link menu-nav-link" href="{{ route('about') }}">About</a>
+            <a class="nav-link menu-nav-link" href="#shop">Shop</a>
           </li>
           <li class="nav-item">
             <a class="nav-link menu-nav-link" href="#sale">Sale</a>
@@ -33,10 +28,10 @@ $totalPrice = isset($cart['total']) ? number_format($cart['total']) : 0;
           </li>
           <li class="nav-item d-none d-lg-block">
             <a class="nav-link menu-nav-link" href="javascript:void(0);" id="cart"><i
-                class="icon-cart cart-header-price"> {{ $totalPrice }} VND</i></a>
+                class="icon-cart cart-header-price"> $0.00</i></a>
           </li>
           <li class="nav-item d-lg-none">
-            <a class="nav-link menu-nav-link" href="cart.html"><i class="icon-cart"> {{ $totalPrice }} VND</i></a>
+            <a class="nav-link menu-nav-link" href="cart.html"><i class="icon-cart"> $0.00</i></a>
           </li>
           <li class="nav-item d-lg-none">
             <div class="search-form search-form-inline">
