@@ -9,6 +9,7 @@
   <meta name="description" content="">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <link href="img/favicon.ico" rel="shortcut icon">
   <link href="img/touch.png" rel="apple-touch-icon-precomposed">
   <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
@@ -16,7 +17,7 @@
 </head>
 
 <body>
-  @include('layouts.header')
+    @yield('header')
   <!-- MAIN -->
   <main class="main">
     @yield('content')
