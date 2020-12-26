@@ -15,7 +15,7 @@ class ProductRepository extends RepositoryAbstract implements ProductRepositoryI
 
     public function hotProduct()
     {
-        return $this->model->hotProduct()->inStock()->get();
+        return $this->model->hotProduct()->get();
     }
 
     public function comingProduct()

@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('header')
-  @include('layouts.header-index')
-@endsection
-
 @section('content')
 
   <section id="welcome" class="section section-welcome patern">
@@ -79,7 +75,71 @@
     </div>
   </section>
 
-  @include('home._about')
+  <section id="about" class="section section-about-us gap-up-1 gap-down-1">
+    <div class="container">
+      <div class="heading">
+        <div class="heading-wrap">
+          <h2 class="heading-title">We are <b>organic food shop</b></h2>
+          <h5 class="heading-subtitle">About us</h5>
+        </div>
+      </div>
+      <div class="about">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="about-item-wrap-left">
+              <div class="about-item">
+                <img src="img/pepper.png" alt="pepper">
+                <h4>Natural</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do</p>
+              </div>
+            </div>
+            <div class="about-item-wrap-left">
+              <div class="about-item">
+                <img src="img/turnip.png" alt="pepper">
+                <h4>Organic</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-order_sm-1">
+            <div class="about-item-wrap-center">
+              <div class="about-item">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                  incididunt ut
+                  labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                  ullamco laboris
+                  nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                  voluptate velit
+                  esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                  proident, sunt in
+                  culpa qui officia deserunt mollit anim id est laborum. </p>
+                <div class="button-wrap">
+                  <a href="about.html" class="btn btn-white">Read more</a>
+                </div>
+                <img src="img/radish.png" alt="pepper">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="about-item-wrap-right">
+              <div class="about-item">
+                <img src="img/eggplant.png" alt="pepper">
+                <h4>Natural</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do</p>
+              </div>
+            </div>
+            <div class="about-item-wrap-right">
+              <div class="about-item">
+                <img src="img/cauliflower.png" alt="pepper">
+                <h4>Organic</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section id="shop" class="section section-shop patern">
     <div class="container">
@@ -90,14 +150,200 @@
         </div>
       </div>
       <div class="shuffle-wrap">
-        @include('layouts.category-nav')
+        <ul class="shuffle-buttons-list">
+          <li class="shuffle-button-item"><a href="javascript:void(0);" class="btn btn-transparent active"
+              data-group="all">All products</a></li>
+          <li class="shuffle-button-item"><a href="javascript:void(0);" class="btn btn-transparent"
+              data-group="vegetables">Vegetables</a></li>
+          <li class="shuffle-button-item"><a href="javascript:void(0);" class="btn btn-transparent"
+              data-group="fruits">Fruits</a></li>
+          <li class="shuffle-button-item"><a href="javascript:void(0);" class="btn btn-transparent"
+              data-group="beans">Beans</a></li>
+          <li class="shuffle-button-item"><a href="javascript:void(0);" class="btn btn-transparent"
+              data-group="juices">Juices</a></li>
+          <li class="shuffle-button-item"><a href="javascript:void(0);" class="btn btn-transparent"
+              data-group="other">Other</a></li>
+        </ul>
         <div class="shuffle-items-wrap row" id="shuffle-grid">
-          @include('components._product-list', [
-          'products' => $products
-          ])
+          @foreach ($products as $product)
+            <div class="col-xl-3 col-lg-4 col-sm-6 shuffle-item" data-groups='["vegetables"]'>
+              <div class="card-item ">
+                <div class="card-item-img">
+                  <img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}">
+                </div>
+                <div class="card-item-descr">
+                  <h4>{{ $product->name }}</h4>
+                  @if ($product->is_sale)
+                    <p class="price">{{ number_format($product->promotion_price) }} VND<span
+                        class="price-sale">{{ number_format($product->unit_price) }}</span></p>
+                  @else
+                    <p class="price">{{ number_format($product->price) }} VND</p>
+                  @endif
+                </div>
+                <div class="card-item-hover">
+                  <ul class="hover-list">
+                    {{-- <li><a href="#?"><i class="icon-shape"></i></a>
+                    </li> --}}
+                    <li><a href="#?" data-toggle="modal" data-target="#card-item-modal"><i
+                          class="icon-arrows-open"></i></a>
+                    </li>
+                    <li><a href="#?"><i class="icon-cart"></i></a></li>
+                  </ul>
+                </div>
+                <ul class="label">
+                  @if ($product->is_new)
+                    <li class="label-new">new</li>
+                  @endif
+                  @if ($product->is_sale)
+                    <li class="label-sale">sale</li>
+                  @endif
+                </ul>
+              </div>
+            </div>
+          @endforeach
+          <div class="col-xl-3 col-lg-4 col-sm-6 shuffle-item" data-groups='["restaurant"]'>
+            <div class="card-item ">
+              <div class="card-item-img">
+                <img src="img/mushrooms.png" alt="mushrooms">
+              </div>
+              <div class="card-item-descr">
+                <h4>Mushrooms - 1lb</h4>
+                <p class="price">$11.25</p>
+              </div>
+              <div class="card-item-hover">
+                <ul class="hover-list">
+                  <li><a href="#?"><i class="icon-shape"></i></a></li>
+                  <li><a href="#?" data-toggle="modal" data-target="#card-item-modal"><i class="icon-arrows-open"></i></a>
+                  </li>
+                  <li><a href="#?"><i class="icon-cart"></i></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-4 col-sm-6 shuffle-item" data-groups='["fruits"]'>
+            <div class="card-item">
+              <div class="card-item-img">
+                <img src="img/cabage.png" alt="cabage">
+              </div>
+              <div class="card-item-descr">
+                <h4>White cabbage - 1lb</h4>
+                <p class="price">$6.25<span class="price-sale">$11.25</span></p>
+              </div>
+              <div class="card-item-hover">
+                <ul class="hover-list">
+                  <li><a href="#?"><i class="icon-shape"></i></a></li>
+                  <li><a href="#?" data-toggle="modal" data-target="#card-item-modal"><i class="icon-arrows-open"></i></a>
+                  </li>
+                  <li><a href="#?"><i class="icon-cart"></i></a></li>
+                </ul>
+              </div>
+              <ul class="label">
+                <li class="label-new">new</li>
+                <li class="label-sale">sale</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-4 col-sm-6 shuffle-item" data-groups='["fruits"]'>
+            <div class="card-item">
+              <div class="card-item-img">
+                <img src="img/corn.png" alt="corn">
+              </div>
+              <div class="card-item-descr">
+                <h4>Organic corn - 1lb</h4>
+                <p class="price">$11.25</p>
+              </div>
+              <div class="card-item-hover">
+                <ul class="hover-list">
+                  <li><a href="#?"><i class="icon-shape"></i></a></li>
+                  <li><a href="#?" data-toggle="modal" data-target="#card-item-modal"><i class="icon-arrows-open"></i></a>
+                  </li>
+                  <li><a href="#?"><i class="icon-cart"></i></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-4 col-sm-6 shuffle-item" data-groups='["beans"]'>
+            <div class="card-item">
+              <div class="card-item-img">
+                <img src="img/red-cabage.png" alt="cabage">
+              </div>
+              <div class="card-item-descr">
+                <h4>Red cabbage - 1lb</h4>
+                <p class="price">$11.25</p>
+              </div>
+              <div class="card-item-hover">
+                <ul class="hover-list">
+                  <li><a href="#?"><i class="icon-shape"></i></a></li>
+                  <li><a href="#?" data-toggle="modal" data-target="#card-item-modal"><i class="icon-arrows-open"></i></a>
+                  </li>
+                  <li><a href="#?"><i class="icon-cart"></i></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-4 col-sm-6 shuffle-item" data-groups='["juices"]'>
+            <div class="card-item">
+              <div class="card-item-img">
+                <img src="img/potato.png" alt="potato">
+              </div>
+              <div class="card-item-descr">
+                <h4>Potatoes - 1lb</h4>
+                <p class="price">$11.25</p>
+              </div>
+              <div class="card-item-hover">
+                <ul class="hover-list">
+                  <li><a href="#?"><i class="icon-shape"></i></a></li>
+                  <li><a href="#?" data-toggle="modal" data-target="#card-item-modal"><i class="icon-arrows-open"></i></a>
+                  </li>
+                  <li><a href="#?"><i class="icon-cart"></i></a></li>
+                </ul>
+              </div>
+              <ul class="label">
+                <li class="label-sale">sale</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-4 col-sm-6 shuffle-item" data-groups='["juices"]'>
+            <div class="card-item">
+              <div class="card-item-img">
+                <img src="img/pepper-img.png" alt="pepper">
+              </div>
+              <div class="card-item-descr">
+                <h4>Paprika pepper - 1lb</h4>
+                <p class="price">$11.25</p>
+              </div>
+              <div class="card-item-hover">
+                <ul class="hover-list">
+                  <li><a href="#?"><i class="icon-shape"></i></a></li>
+                  <li><a href="#?" data-toggle="modal" data-target="#card-item-modal"><i class="icon-arrows-open"></i></a>
+                  </li>
+                  <li><a href="#?"><i class="icon-cart"></i></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-4 col-sm-6 shuffle-item" data-groups='["other"]'>
+            <div class="card-item">
+              <div class="card-item-img">
+                <img src="img/cucumbers.png" alt="cucumbers">
+              </div>
+              <div class="card-item-descr">
+                <h4>Cucumbers - 1lb</h4>
+                <p class="price">$11.25</p>
+              </div>
+              <div class="card-item-hover">
+                <ul class="hover-list">
+                  <li><a href="#?"><i class="icon-shape"></i></a></li>
+                  <li><a href="#?" data-toggle="modal" data-target="#card-item-modal"><i class="icon-arrows-open"></i></a>
+                  </li>
+                  <li><a href="#?"><i class="icon-cart"></i></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="button-wrap">
-          <a href="{{ route('shop') }}" class="btn btn-border">View more</a>
+          <a href="shop.html" class="btn btn-border">View more</a>
         </div>
       </div>
     </div>
