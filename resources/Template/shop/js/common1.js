@@ -1,10 +1,5 @@
 ;(function($) {
   'use strict'
-  $.ajaxSetup({
-    headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-    },
-  })
 
   $(document).ready(function() {
     // SMOOTH SCROLL
@@ -40,186 +35,23 @@
       }
     })
 
-    function addToCart(productId, quantity = 1) {
-      $.ajax({
-        type: 'post',
-        url: 'api/add-to-cart',
-        data: { productId, quantity },
-        success(response) {
-          updateCart(response.cart)
-        },
-      })
-    }
-
-    function updateCart(cart) {
-      $('.cart-header-price').text(
-        ` ${new Intl.NumberFormat().format(cart.total)} VND`
-      )
-
-      const { items } = cart
-
-      $('.cart-items').empty()
-      $.each(items, (i, n) => {
-        $('.cart-items').append(
-          `<div class="cart-item">
-                                  <div class="cart-item-img-wrap">
-                                    <img src="/storage/${
-                                      items[i].item.image
-                                    }" alt="cart">
-                                  </div>
-                                  <div class="cart-item-descr" data-product-id=${
-                                    items[i].item.id
-                                  }>
-                                    <h5>${items[i].item.name}</h5>
-                                    <span>${
-                                      items[i].quantity
-                                    } X ${new Intl.NumberFormat().format(
-            items[i].item.price
-          )} VND</span>
-                                  </div>
-                                  <div class="close-btn close-cart">
-                                  </div>
-                                </div>`
-        )
-      })
-    }
-
-    function subQuantityFromCart(productId) {
-      $.ajax({
-        type: 'post',
-        url: 'api/sub-quantity',
-        data: { productId },
-        success(response) {
-          updateCart(response.cart)
-        },
-      })
-    }
-
-    $('.more-temp').on('click', function() {
-      const quantity = parseInt($('#modalQuantity').val()) + 1
-      $('#modalQuantity').val(quantity)
-      $('#modalQuantity').change()
-    })
-
-    $('.less-temp').on('click', function() {
-      let quantity = parseInt($('#modalQuantity').val()) - 1
-      quantity = quantity <= 0 ? 1 : quantity
-
-      $('#modalQuantity').val(quantity)
-      $('#modalQuantity').change()
-    })
-
-    $('.btn-add-to-cart').on('click', async function() {
-      const productId = $('#modalQuantity').data('product-id')
-      const quantity = $('#modalQuantity').val()
-      await addToCart(productId, quantity)
-      $('#card-item-modal').modal('hide')
-    })
-
-    $(document).on('click', '.close-cart', function() {
-      const cartItem = $(this).closest('.cart-item')
-      const productId = cartItem.find('.cart-item-descr').data('product-id')
-
-      $.ajax({
-        url: 'api/remove-from-cart',
-        type: 'post',
-        data: {
-          productId,
-        },
-        success(response) {
-          cartItem.remove()
-          updateCart(response.cart)
-        },
-      })
-    })
-
-    $('.remove-item').on('click', function() {
-      if (confirm('Bạn có muốn xóa sản phẩm này khỏi giỏ hàng không?')) {
-        const cartDesc = $(this).closest('.cart-table-descr')
-
-        const productId = cartDesc.find('input.item-id').val()
-        const quantity = cartDesc.find('input.item-quantity').val()
-        const price = cartDesc.find('input.item-quantity').data('price')
-
-        $.ajax({
-          url: 'api/remove-from-cart',
-          type: 'post',
-          data: {
-            productId,
-          },
-          success(response) {
-            const totalPrice =
-              parseInt($('.cart-total-price').data('total-price')) -
-              parseInt(quantity) * parseInt(price)
-
-            $('.cart-total-price').data('total-price', totalPrice)
-            $('.cart-total-price').text(
-              `${new Intl.NumberFormat().format(totalPrice)} VND`
-            )
-
-            cartDesc.remove()
-            updateCart(response.cart)
-          },
-        })
-      }
-    })
-
     // PRODUCTS COUNT
-    $('.less-n').on('click', async function() {
-      const productId = $(this)
-        .closest('.quantity-wrap')
-        .find('.item-id')
-        .val()
-
+    $('.less').on('click', function() {
       var $quantity = $(this)
         .parent()
-        .find('input.item-quantity')
+        .find('input')
       var count = parseInt($quantity.val()) - 1
-      if (count >= 1) {
-        await subQuantityFromCart(productId)
-
-        const price = $(this)
-          .closest('.quantity-wrap')
-          .find('.item-quantity')
-          .data('price')
-        const totalPrice =
-          parseInt($('.cart-total-price').data('total-price')) - parseInt(price)
-        $('.cart-total-price').data('total-price', totalPrice)
-        $('.cart-total-price').text(
-          `${new Intl.NumberFormat().format(totalPrice)} VND`
-        )
-      }
       count = count < 1 ? 1 : count
       $quantity.val(count)
       $quantity.change()
       return false
     })
-
-    $('.more-n').on('click', async function() {
-      const productId = $(this)
-        .closest('.quantity-wrap')
-        .find('.item-id')
-        .val()
-
-      await addToCart(productId)
-
+    $('.more').on('click', function() {
       var $quantity = $(this)
         .parent()
-        .find('input.item-quantity')
+        .find('input')
       $quantity.val(parseInt($quantity.val()) + 1)
       $quantity.change()
-      const price = $(this)
-        .closest('.quantity-wrap')
-        .find('.item-quantity')
-        .data('price')
-
-      const totalPrice =
-        parseInt($('.cart-total-price').data('total-price')) + parseInt(price)
-
-      $('.cart-total-price').data('total-price', totalPrice)
-      $('.cart-total-price').text(
-        `${new Intl.NumberFormat().format(totalPrice)} VND`
-      )
       return false
     })
 
@@ -370,125 +202,10 @@
       })
     }
 
-    $('.add-to-cart').click(function() {
-      const productId = $(this).data('product-id')
-
-      addToCart(productId)
-    })
-
-    // $('.more').click(async function() {
-
-    // })
-
-    // $('.less').click(function () {
-    //     const input = $(this).closest('.quantity-wrap').find('.item-quantity');
-    //     const quantity = input.val();
-
-    // })
-
-    $('.item-quantity').change(function() {
-      const price = $(this).data('price')
-      const quantity = $(this).val()
-      $(this)
-        .closest('.cart-table-descr')
-        .find('.total-price')
-        .text(` ${new Intl.NumberFormat().format(price * quantity)} VND`)
-
-      if (quantity == 1) {
-        $(this)
-          .closest('.cart-table-descr')
-          .find('.total-price').disable
-      }
-    })
-
-    $('#modalQuantity').change(function() {
-      const quantity = $(this).val() < 1 ? 1 : $(this).val()
-      const subtotal =
-        parseInt(quantity) *
-        parseInt($('#modalProductPromotionPrice').data('price'))
-      $('#modalSubtotal').text(
-        `${new Intl.NumberFormat().format(subtotal)} VND`
-      )
-    })
-
-    $('#selectOrderType').change(function() {
-      console.log($(this).val())
-      window.location = $(this).val()
-    })
-
-    $('.open-detail').click(async function() {
-      //   $('#card-item-modal').data('product-id', )
-      const productId = $(this).data('product-id')
-      $('#modalSlideProductImage').empty()
-      $('#modalSliderNav').empty()
-      await $('.modal-slider-for').slick('removeSlide', null, null, true)
-      await $('.modal-slider-nav').slick('removeSlide', null, null, true)
-      await $.ajax({
-        type: 'get',
-        url: `/api/products/detail/${productId}`,
-        success: function(response) {
-          const { product } = response
-
-          product.images.forEach(item => {
-            $('#modalSlideProductImage').append(`
-              <div class="card-item-modal-slider-for-item">
-                    <div class="slider-for-img-wrap">
-                      <img src="/storage/${item.url}" alt="slider">
-                      <ul class="label">
-                        <li class="label-new">new</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                    `)
-            $('#modalSliderNav').append(`
-                    <div class="card-item-modal-slider-nav-item">
-                      <div class="slider-nav-img-wrap">
-                        <img src="/storage/${item.url}" alt="face">
-                      </div>
-                    </div>
-                    `)
-          })
-          $('#modalProductName').text(product.name)
-          $('#modalProductCategory').text(product.category.name)
-          $('#modalProductDescription').text(product.description)
-          if (product.is_sale) {
-            $('#modalProductUnitPrice').show()
-            $('#modalProductUnitPrice').text(product.unit_price)
-            $('#modalProductPromotionPrice').text(
-              `${new Intl.NumberFormat().format(product.promotion_price)} VND`
-            )
-            $('#modalProductPromotionPrice').data(
-              'price',
-              `${product.promotion_price}`
-            )
-          } else {
-            $('#modalProductPromotionPrice').text(
-              `${new Intl.NumberFormat().format(product.unit_price)} VND`
-            )
-            $('#modalProductPromotionPrice').data(
-              'price',
-              `${product.unit_price}`
-            )
-            $('#modalProductUnitPrice').hide()
-          }
-          $('#modalProductUnit').text(`/ 1 ${product.unit}`)
-          $('#modalSubtotal').text(
-            `${new Intl.NumberFormat().format(
-              $('#modalProductPromotionPrice').data('price')
-            )} VND`
-          )
-          $('#modalQuantity').val(1)
-          $('#modalQuantity').data('productId', product.id)
-        },
-      })
-
-      $('#card-item-modal').modal()
-    })
-
     //CARD ITEM MODAL SLIDER
     if ($('#card-item-modal').length) {
       $('#card-item-modal').on('shown.bs.modal', function(e) {
+        alert('a')
         $('.modal-slider-for')
           .slick('getSlick')
           .refresh()
@@ -636,7 +353,6 @@
 
     // CHECKOUT STEPS
     if ($('#checkout_steps').length) {
-      console.log('a')
       var form = $('#checkout_steps').show()
       form
         .steps({
