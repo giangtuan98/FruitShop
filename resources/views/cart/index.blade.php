@@ -108,7 +108,7 @@ $cart = session('cart', null);
           </div>
           <div class="row justify-content-between">
             <div class="col-md-3 col-sm-12 text-center text-md-left">
-              <a href="{{ route('shop') }}" class="btn btn-white btn-md">Tiếp túc shopping</a>
+              <a href="{{ route('shop') }}" class="btn btn-white btn-md">Tiếp tuc shopping</a>
             </div>
             <div class="col-md-9 col-sm-12">
               <div class="cart-checkout d-flex justify-content-center justify-content-md-end">

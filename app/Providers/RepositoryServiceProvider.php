@@ -9,6 +9,7 @@ class RepositoryServiceProvider extends ServiceProvider
     protected $repos = [
         'Category',
         'Product',
+        'Order',
     ];
     /**
      * Register services.

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CheckoutRequest;
+use App\Mail\OrderSuccessMail;
+use App\Models\Order;
 use App\Models\Product;
+use App\Repositories\Contracts\OrderRepositoryInterface;
 use App\Repositories\Contracts\ProductRepositoryInterface;
 use App\Repositories\Eloquents\CategoryRepository;
 use App\Services\CartService;
@@ -11,6 +14,7 @@ use App\Traits\SortTrait;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -18,15 +22,18 @@ class HomeController extends Controller
 
     private $productRepository;
     private $categoryRepository;
+    private $orderRepository;
     private $cartService;
 
     public function __construct(
         ProductRepositoryInterface $productRepository,
         CategoryRepository $categoryRepository,
+        OrderRepositoryInterface $orderRepository,
         CartService $cartService
     ) {
         $this->productRepository = $productRepository;
         $this->categoryRepository = $categoryRepository;
+        $this->orderRepository = $orderRepository;
         $this->cartService = $cartService;
     }
 
@@ -105,19 +112,52 @@ class HomeController extends Controller
 
     public function checkout(CheckoutRequest $request)
     {
-        $data = $request->all([
+        $customer = $request->all([
             'name',
             'phone',
             'email',
             'address',
         ]);
+        if (!session()->has('cart')) {
+            return view('checkout.nothing');
+        }
 
         $cart = $this->cartService->updateCart(session('cart', null));
+        $orderDetail = [];
+        foreach ($cart['items'] as $item) {
+            $orderDetail[] = [
+                'product_id' => $item['item']->id,
+                'quantity' => $item['quantity'],
+                'unit_price' => $item['item']->unit_price,
+            ];
+        }
 
-        DB::transaction(function () use ($cart){
+        // try {
+        DB::beginTransaction();
 
-        })
+        $order = Order::create([
+            'customer_info' => json_encode($customer),
+            'code' => Order::getRandomUniqueCode(),
+            'total' => $cart['total']
+        ]);
+        $order->orderDetails()->createMany($orderDetail);
 
-        dd($data);
+        DB::commit();
+        Mail::to('giangtuan6199@gmail.com')->send(new OrderSuccessMail(['cart' => $cart, 'customer' => $customer, 'code' => $order->code]));
+        session()->forget('cart');
+
+
+        return view('checkout.success', [
+            'order' => $order
+        ]);
+        // } catch (\Throwable $th) {
+        //     DB::rollBack();
+        // }
+
+        return view('checkout.fail');
+    }
+
+    public function testEmail()
+    {
     }
 }

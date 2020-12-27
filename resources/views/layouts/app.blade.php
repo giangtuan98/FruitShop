@@ -19,7 +19,7 @@
 <body>
   @yield('header')
   <!-- MAIN -->
-  <main class="main">
+  <main class="main full-height">
     @yield('content')
   </main>
   <!-- FOOTER -->

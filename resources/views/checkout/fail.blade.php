@@ -11,7 +11,7 @@
   <!-- SECTION ABSOLUTE -->
   <section class="section section-absolute">
     <div class="container text-center">
-      <h3 class="mb-5">There is no items in your cart</h3>
+      <h3 class="mb-5">Something went wrong</h3>
       <div class="btn-wrap">
         <a href="{{ route('shop') }}" class="btn btn-primary btn-lg">Continue shopping</a>
       </div>

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Order extends Model
 {
@@ -11,8 +12,25 @@ class Order extends Model
 
     protected $table = "orders";
 
+    protected $fillable = [
+        'customer_info',
+        'total',
+        'code',
+    ];
+
     public function orderDetails()
     {
         return $this->hasMany(OrderDetail::class);
+    }
+
+    public static function getRandomUniqueCode()
+    {
+        $random = "";
+        do {
+            $random = Str::random(10);
+            $count = self::where('code', $random)->count();
+        } while ($count > 0);
+
+        return $random;
     }
 }
