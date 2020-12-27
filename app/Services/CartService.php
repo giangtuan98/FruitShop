@@ -29,7 +29,7 @@ class CartService
         $cart['total'] += $item->price * $quantity;
         $cart['items'] = $items;
 
-        return $cart;
+        return $this->updateCart($cart);
     }
 
     public function removeFromCart($cart, Product $item, $quantity = 1)
@@ -61,7 +61,7 @@ class CartService
         $items[$item->id]['total'] -= $item->price * $quantity;
         $cart['items'] = $items;
 
-        return $cart;
+        return $this->updateCart($cart);
     }
 
     public function createCart()
@@ -92,6 +92,30 @@ class CartService
         $cart['quantity'] -= $quantity;
         $cart['total'] -= $total;
         $cart['items'] = $items;
+
+        return $this->updateCart($cart);
+    }
+
+    public function updateCart($cart)
+    {
+        if (!$cart) {
+            $cart = $this->createCart();
+        }
+
+        $total = 0;
+
+        $listProductId = array_keys($cart['items']);
+        $listProduct = Product::whereIn('id', $listProductId)->with('category')->get();
+        $items = $cart['items'];
+        foreach ($listProduct as $product) {
+            $itemTotal = $product->price * $items[$product->id]['quantity'];
+            $items[$product->id]['item'] = $product;
+            $items[$product->id]['total'] = $itemTotal;
+            $total += $itemTotal;
+        }
+
+        $cart['items'] = $items;
+        $cart['total'] = $total;
 
         return $cart;
     }

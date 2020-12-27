@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CheckoutRequest;
 use App\Models\Product;
 use App\Repositories\Contracts\ProductRepositoryInterface;
 use App\Repositories\Eloquents\CategoryRepository;
+use App\Services\CartService;
 use App\Traits\SortTrait;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -15,13 +18,16 @@ class HomeController extends Controller
 
     private $productRepository;
     private $categoryRepository;
+    private $cartService;
 
     public function __construct(
         ProductRepositoryInterface $productRepository,
-        CategoryRepository $categoryRepository
+        CategoryRepository $categoryRepository,
+        CartService $cartService
     ) {
         $this->productRepository = $productRepository;
         $this->categoryRepository = $categoryRepository;
+        $this->cartService = $cartService;
     }
 
     public function index()
@@ -82,8 +88,36 @@ class HomeController extends Controller
         return view('cart.index');
     }
 
-    public function checkout()
+    public function getCheckout()
     {
-        return view('checkout.index');
+        $cart = session('cart', null);
+
+        if (!$cart || $cart['quantity'] == 0) {
+            return view('checkout.nothing');
+        }
+
+        $cart = $this->cartService->updateCart($cart);
+
+        return view('checkout.index', [
+            'cart' => $cart
+        ]);
+    }
+
+    public function checkout(CheckoutRequest $request)
+    {
+        $data = $request->all([
+            'name',
+            'phone',
+            'email',
+            'address',
+        ]);
+
+        $cart = $this->cartService->updateCart(session('cart', null));
+
+        DB::transaction(function () use ($cart){
+
+        })
+
+        dd($data);
     }
 }

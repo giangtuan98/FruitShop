@@ -1,3 +1,30 @@
+jQuery.extend(jQuery.validator.messages, {
+  required: 'Xin mời nhập thông tin.',
+  remote: 'Please fix this field.',
+  email: 'Email không hợp lệ.',
+  url: 'Please enter a valid URL.',
+  date: 'Please enter a valid date.',
+  dateISO: 'Please enter a valid date (ISO).',
+  number: 'Please enter a valid number.',
+  digits: 'Please enter only digits.',
+  creditcard: 'Please enter a valid credit card number.',
+  equalTo: 'Please enter the same value again.',
+  accept: 'Please enter a value with a valid extension.',
+  maxlength: jQuery.validator.format(
+    'Please enter no more than {0} characters.'
+  ),
+  minlength: jQuery.validator.format('Vui lòng nhập it nhất {0} ký tự.'),
+  rangelength: jQuery.validator.format(
+    'Please enter a value between {0} and {1} characters long.'
+  ),
+  range: jQuery.validator.format('Please enter a value between {0} and {1}.'),
+  max: jQuery.validator.format(
+    'Please enter a value less than or equal to {0}.'
+  ),
+  min: jQuery.validator.format(
+    'Please enter a value greater than or equal to {0}.'
+  ),
+})
 ;(function($) {
   'use strict'
   $.ajaxSetup({
@@ -636,7 +663,6 @@
 
     // CHECKOUT STEPS
     if ($('#checkout_steps').length) {
-      console.log('a')
       var form = $('#checkout_steps').show()
       form
         .steps({
@@ -647,9 +673,9 @@
             cancel: 'Cancel',
             current: 'current step:',
             pagination: 'Pagination',
-            finish: 'Place order',
-            next: 'Continue',
-            previous: 'Back',
+            finish: 'Thanh toán',
+            next: 'Tiếp tục',
+            previous: 'Quay lại',
             loading: 'Loading ...',
           },
           onStepChanging: function(event, currentIndex, newIndex) {
@@ -663,7 +689,16 @@
                 .removeClass('error')
             }
             form.validate().settings.ignore = ':disabled,:hidden'
-            return form.valid()
+            const flg = form.valid()
+
+            if (flg) {
+              $('#checkoutName').text($('#inputName').val())
+              $('#checkoutEmail').text($('#inputEmail').val())
+              $('#checkoutPhone').text($('#inputPhone').val())
+              $('#checkoutAddress').text($('#inputAddress').val())
+            }
+
+            return flg
           },
           onStepChanged: function(event, currentIndex, priorIndex) {},
           onFinishing: function(event, currentIndex) {
@@ -671,7 +706,7 @@
             return form.valid()
           },
           onFinished: function(event, currentIndex) {
-            window.location.href = 'order.html'
+            $('#checkout_steps').submit()
           },
         })
         .validate({

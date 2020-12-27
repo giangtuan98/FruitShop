@@ -72,7 +72,10 @@ class Product extends Model
 
     public function getPriceAttribute()
     {
-        return $this->is_sale ? $this->promotion_price : $this->unit_price;
+        $price = $this->is_sale ? $this->promotion_price : $this->unit_price;
+
+        $this->attributes['price'] = $price;
+        return $price;
     }
 
     public function scopeSortByType($query, $sortType)
