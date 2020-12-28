@@ -98,7 +98,7 @@ $cart = session('cart', null);
             <div class="col-md-4">
               <div class="cart-total text-right">
                 <div class="cart-total-title">
-                  <h3>Thành tiền:</h3>
+                  <h3>Total:</h3>
                 </div>
                 <div class="cart-total-price" data-total-price="{{ $cart['total'] }}">
                   {{ number_format($cart['total']) }} VND
@@ -108,11 +108,11 @@ $cart = session('cart', null);
           </div>
           <div class="row justify-content-between">
             <div class="col-md-3 col-sm-12 text-center text-md-left">
-              <a href="{{ route('shop') }}" class="btn btn-white btn-md">Tiếp tuc shopping</a>
+              <a href="{{ route('shop') }}" class="btn btn-white btn-md">Continue shopping</a>
             </div>
             <div class="col-md-9 col-sm-12">
               <div class="cart-checkout d-flex justify-content-center justify-content-md-end">
-                <a href="{{ route('checkout') }}" class="btn btn-primary btn-md checkout @if(!isset($cart['quantity']) || $cart['quantity'] == 0) disabled @endif ">Thanh toán</a>
+                <a href="{{ route('checkout') }}" class="btn btn-primary btn-md checkout @if(!isset($cart['quantity']) || $cart['quantity'] == 0) disabled @endif ">Checkout</a>
               </div>
             </div>
           </div>

@@ -54,9 +54,16 @@ class HomeController extends Controller
     public function shop(Request $request)
     {
         $orderType = $request->get('orderType');
-        // dd($sortOrder);
-        //
-        $products = Product::select('*')
+        $q = $request->get('q') ?? '';
+        $conn = Product::select('*');
+        $page = $q  == '' ? 'shop.index' : 'search.index';
+        if (strlen($q) > 3) {
+            $conn->search($q);
+        } else {
+            $conn->where('name', 'like', "%{$q}%");
+        }
+
+        $products = $conn
             ->selectRaw('IF(promotion_start_date <= promotion_end_date AND promotion_end_date >= CURDATE(), true, false) as sale_flg')
             ->selectRaw('IF(promotion_start_date <= promotion_end_date AND promotion_end_date >= CURDATE(), promotion_price, unit_price) as price')
             ->inStock()
@@ -64,16 +71,16 @@ class HomeController extends Controller
             ->orderBy('id')
             ->with('category')
             ->paginate(16);
-        $items = $this->sortProductByOrderType(collect($products->items()), $orderType);
+        // $items = $this->sortProductByOrderType(collect($products->items()), $orderType);
 
-        $products = new LengthAwarePaginator($items, $products->total(), $products->perPage(), $products->currentPage(), [
-            'path' => $request->url(),
-            'query' => [
-                'page' => $products->currentPage()
-            ]
-        ]);
+        // $products = new LengthAwarePaginator($items, $products->total(), $products->perPage(), $products->currentPage(), [
+        //     'path' => $request->url(),
+        //     'query' => [
+        //         'page' => $products->currentPage()
+        //     ]
+        // ]);
 
-        return view('shop.index', [
+        return view($page, [
             'products' => $products->appends(request()->input())
         ]);
     }
@@ -85,13 +92,6 @@ class HomeController extends Controller
 
     public function cart()
     {
-        // session()->put('cart', [
-        //     'items' => [],
-        //     'quantity' => 0,
-        //     'total' => 0
-        // ]);
-        // dd(session('cart'));
-
         return view('cart.index');
     }
 
@@ -155,9 +155,5 @@ class HomeController extends Controller
         // }
 
         return view('checkout.fail');
-    }
-
-    public function testEmail()
-    {
     }
 }

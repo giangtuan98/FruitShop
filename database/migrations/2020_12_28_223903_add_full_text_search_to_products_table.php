@@ -2,9 +2,10 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class AddCodeColumnToOrdersTable extends Migration
+class AddFullTextSearchToProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +14,9 @@ class AddCodeColumnToOrdersTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasColumn('orders', 'code')) {
-
-            Schema::table('orders', function (Blueprint $table) {
-                $table->string('code', 12)->unique('order_code_1');
-            });
-        }
+        Schema::table('products', function (Blueprint $table) {
+            DB::statement('ALTER TABLE products ADD FULLTEXT fulltext_index (name)');
+        });
     }
 
     /**
@@ -28,8 +26,8 @@ class AddCodeColumnToOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::table('orders', function (Blueprint $table) {
-            $table->dropColumn('code');
+        Schema::table('products', function (Blueprint $table) {
+            //
         });
     }
 }

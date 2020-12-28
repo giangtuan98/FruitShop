@@ -39,16 +39,16 @@ $totalPrice = isset($cart['total']) ? number_format($cart['total']) : 0;
           </li>
           <li class="nav-item d-lg-none">
             <div class="search-form search-form-inline">
-              <form action="#?">
-                <input type="text" placeholder="Search...">
+              <form action="{{ route('shop') }}">
+                <input type="text" name="q" placeholder="Search...">
                 <input type="submit" value="Search" class="btn btn-primary">
               </form>
             </div>
           </li>
           <li class="search-form-wrapper d-none d-lg-block">
             <div class="search-form">
-              <form action="#?">
-                <input type="text" placeholder="Search...">
+              <form action="{{ route('shop') }}">
+                <input type="text" name="q" placeholder="Search...">
                 <input type="submit" value="Search" class="btn btn-primary">
               </form>
               <div class="close-btn close-form">

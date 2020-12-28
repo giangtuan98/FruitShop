@@ -6,7 +6,7 @@
 
 @section('content')
   @include('components._shop', [
-  'page' => 'Shop',
+  'page' => 'Search',
   'products' => $products
   ])
 @endsection

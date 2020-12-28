@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\FullTextSearch;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
+    use FullTextSearch;
 
     protected $table = "products";
 
@@ -23,6 +25,10 @@ class Product extends Model
         'description',
         'image',
         'is_new'
+    ];
+
+    protected $searchable = [
+        'name',
     ];
 
     const SORT_PRICE_LOW_TO_HIGH = 1;

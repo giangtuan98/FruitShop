@@ -38,11 +38,10 @@
                 <div class="more more-temp"></div>
               </div>
               <div class="card-item-modal-subtotal">
-                <p class="subtotal">Thành tiền: <span id="modalSubtotal">0</span></p>
+                <p class="subtotal">Subtotal: <span id="modalSubtotal">0</span></p>
               </div>
               <div class="card-item-modal-button-wrap">
-                <a href="#?" class="btn btn-primary btn-sm btn-add-to-cart"><i class="icon-cart"> </i>Thêm vào giỏ
-                  hàng</a>
+                <a href="#?" class="btn btn-primary btn-sm btn-add-to-cart"><i class="icon-cart"> </i>Add to cart</a>
               </div>
             </div>
           </div>
