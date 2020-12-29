@@ -1,5 +1,6 @@
 <?php
 
+use App\Admin\Controllers\OrderController;
 use Illuminate\Routing\Router;
 
 Admin::routes();
@@ -16,4 +17,7 @@ Route::group([
     $router->resource('/products', ProductController::class)->except([]);
     // $router->post('/products', [App\Admin\Controllers\ProductController::class, 'storeProduct'])->name('products.store');
     $router->resource('categories', CategoryController::class);
+
+    $router->get('orders', [OrderController::class, 'index']);
+    $router->get('orders/{id}', [OrderController::class, 'show']);
 });

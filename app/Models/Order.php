@@ -18,6 +18,8 @@ class Order extends Model
         'code',
     ];
 
+    protected $casts = ['customer_info' => 'json'];
+
     public function orderDetails()
     {
         return $this->hasMany(OrderDetail::class);
@@ -33,4 +35,9 @@ class Order extends Model
 
         return $random;
     }
+
+    // public function getCustomerInfoAttribute($value)
+    // {
+    //     return json_decode($value);
+    // }
 }

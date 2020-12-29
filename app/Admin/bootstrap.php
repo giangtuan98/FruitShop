@@ -18,4 +18,46 @@
  *
  */
 
+use Encore\Admin\Actions\Action;
+use Encore\Admin\Form;
+use Encore\Admin\Grid;
+use Encore\Admin\Show;
+
 Encore\Admin\Form::forget(['map', 'editor']);
+
+Form::init(function (Form $form) {
+
+    $form->disableEditingCheck();
+
+    $form->disableCreatingCheck();
+
+    $form->disableViewCheck();
+
+    $form->tools(function (Form\Tools $tools) {
+        $tools->disableDelete();
+        $tools->disableView();
+        $tools->disableList();
+    });
+});
+
+Show::init(function (Show $show) {
+    $show->panel()
+        ->tools(function ($tools) {
+            $tools->disableEdit();
+            $tools->disableDelete();
+        });
+
+    // $show->tools(function (Show\Tools $tools) {
+    //     $tools->disableDelete();
+    //     // $tools->disableView();
+    //     $tools->disableList();
+    // });
+});
+
+Grid::init(function (Grid $grid) {
+    $grid->disableCreateButton();
+    $grid->actions(function ($actions) {
+        $actions->disableDelete();
+        $actions->disableEdit();
+    });
+});
