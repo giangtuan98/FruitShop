@@ -103,19 +103,30 @@ class CartService
         }
 
         $total = 0;
+        $totalQuantity = 0;
 
         $listProductId = array_keys($cart['items']);
         $listProduct = Product::whereIn('id', $listProductId)->with('category')->get();
         $items = $cart['items'];
         foreach ($listProduct as $product) {
-            $itemTotal = $product->price * $items[$product->id]['quantity'];
-            $items[$product->id]['item'] = $product;
-            $items[$product->id]['total'] = $itemTotal;
-            $total += $itemTotal;
+            if ($items[$product->id]['quantity'] <= 0) {
+                unset($items[$product->id]);
+            } else {
+                $quantity = $product->quantity >= $items[$product->id]['quantity'] ? $items[$product->id]['quantity'] : $product->quantity;
+                $itemTotal = $product->price * $quantity;
+                $items[$product->id]['item'] = $product;
+                $items[$product->id]['total'] = $itemTotal;
+                $items[$product->id]['quantity'] = $quantity;
+                $total += $itemTotal;
+                $totalQuantity += $quantity;
+            }
         }
 
         $cart['items'] = $items;
         $cart['total'] = $total;
+        $cart['quantity'] = $totalQuantity;
+
+        session()->put('cart', $cart);
 
         return $cart;
     }

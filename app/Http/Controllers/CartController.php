@@ -22,9 +22,16 @@ class CartController extends Controller
     public function addToCart(Request $request)
     {
         $product = $this->productRepository->show($request->productId);
-        $product->price = $product->price;
+        $quantity = $request->quantity ?? 1;
         $cart = session('cart', null);
-        $cart = $this->cartService->addToCart($cart, $product, $request->quantity ?? 1);
+        $cartProductQuantity = isset($cart['items'][$product->id]) ? $cart['items'][$product->id]['quantity'] : 0;
+        if ($product->quantity < ($quantity + $cartProductQuantity)) {
+            return response([
+                'error' => "This product isn't enough quantity"
+            ], 422);
+        }
+        $product->price = $product->price;
+        $cart = $this->cartService->addToCart($cart, $product, $quantity);
         session(['cart' => $cart]);
 
         return response()->json([

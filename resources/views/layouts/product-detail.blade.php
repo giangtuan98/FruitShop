@@ -25,6 +25,10 @@
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
                 ex ea commodo consequat.
               </div>
+
+              <p class="card-item-modal-descr">
+                Quantity: <span id="modalProductQuantity"></span>
+              </p>
               <div class="card-item-modal-price">
                 <span class="price" id="modalProductPromotionPrice">0</span>
                 <span class="old-price" id="modalProductUnitPrice">0</span>

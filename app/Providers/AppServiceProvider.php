@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Models\Category;
+use App\Models\Product;
+use App\Observers\ProductObserver;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 
@@ -33,5 +35,7 @@ class AppServiceProvider extends ServiceProvider
         $cart = session('cart');
 
         View::share('cart', $cart);
+
+        // Product::observe(ProductObserver::class);
     }
 }

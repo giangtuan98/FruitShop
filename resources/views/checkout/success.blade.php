@@ -17,7 +17,7 @@
       <p class="order-descr">You will receive an order confirmation email with details of your order and a link to track
         its progress.</p>
       <div class="btn-wrap">
-        <a href="shop.html" class="btn btn-primary btn-lg">Continue shopping</a>
+        <a href="{{ route('shop') }}" class="btn btn-primary btn-lg">Continue shopping</a>
       </div>
     </div>
   </section>

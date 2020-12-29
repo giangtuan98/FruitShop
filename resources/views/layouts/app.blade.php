@@ -14,6 +14,8 @@
   <link href="img/touch.png" rel="apple-touch-icon-precomposed">
   <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
   <link rel="stylesheet" href="css/all.css">
+  <link rel="stylesheet" type="text/css" href="css/notify.css">
+  <link rel="stylesheet" type="text/css" href="css/prettify.css">
 </head>
 
 <body>
@@ -44,6 +46,8 @@
   <script src="js/validate/validate.min.js"></script>
   <script src="js/bootstrap_select/bootstrap-select.min.js"></script>
   <script src="js/slick-lightbox/slick-lightbox.min.js"></script>
+  <script src="js/notify.js"></script>
+  <script src="js/prettify.js"></script>
   {{-- <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4BYcbdOVz2fyOAJsXXljYqDWpknhq-58"></script>
   --}}

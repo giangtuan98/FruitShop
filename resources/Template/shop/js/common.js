@@ -73,7 +73,19 @@ jQuery.extend(jQuery.validator.messages, {
         url: 'api/add-to-cart',
         data: { productId, quantity },
         success(response) {
+          $.notify('Add to cart successfully', {
+            align: 'right',
+            verticalAlign: 'bottom',
+            type: 'success',
+          })
           updateCart(response.cart)
+        },
+        error(error) {
+          $.notify(error.responseJSON.error, {
+            align: 'right',
+            verticalAlign: 'top',
+            type: 'danger',
+          })
         },
       })
     }
@@ -507,6 +519,7 @@ jQuery.extend(jQuery.validator.messages, {
           )
           $('#modalQuantity').val(1)
           $('#modalQuantity').data('productId', product.id)
+          $('#modalProductQuantity').text(product.quantity)
         },
       })
 

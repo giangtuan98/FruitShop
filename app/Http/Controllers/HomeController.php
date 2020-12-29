@@ -11,6 +11,7 @@ use App\Repositories\Contracts\ProductRepositoryInterface;
 use App\Repositories\Eloquents\CategoryRepository;
 use App\Services\CartService;
 use App\Traits\SortTrait;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
@@ -71,14 +72,6 @@ class HomeController extends Controller
             ->orderBy('id')
             ->with('category')
             ->paginate(16);
-        // $items = $this->sortProductByOrderType(collect($products->items()), $orderType);
-
-        // $products = new LengthAwarePaginator($items, $products->total(), $products->perPage(), $products->currentPage(), [
-        //     'path' => $request->url(),
-        //     'query' => [
-        //         'page' => $products->currentPage()
-        //     ]
-        // ]);
 
         return view($page, [
             'products' => $products->appends(request()->input())
@@ -123,36 +116,51 @@ class HomeController extends Controller
         }
 
         $cart = $this->cartService->updateCart(session('cart', null));
-        $orderDetail = [];
-        foreach ($cart['items'] as $item) {
-            $orderDetail[] = [
-                'product_id' => $item['item']->id,
-                'quantity' => $item['quantity'],
-                'unit_price' => $item['item']->unit_price,
-            ];
+        if ($cart['quantity'] <= 0) {
+            return view('checkout.nothing');
         }
 
-        // try {
-        DB::beginTransaction();
 
-        $order = Order::create([
-            'customer_info' => json_encode($customer),
-            'code' => Order::getRandomUniqueCode(),
-            'total' => $cart['total']
-        ]);
-        $order->orderDetails()->createMany($orderDetail);
+        try {
+            DB::beginTransaction();
 
-        DB::commit();
-        Mail::to('giangtuan6199@gmail.com')->send(new OrderSuccessMail(['cart' => $cart, 'customer' => $customer, 'code' => $order->code]));
-        session()->forget('cart');
+            $orderDetail = [];
+            foreach ($cart['items'] as $item) {
+                $orderDetail[] = [
+                    'product_id' => $item['item']->id,
+                    'quantity' => $item['quantity'],
+                    'unit_price' => $item['item']->unit_price,
+                ];
+
+                if ($item['quantity'] == 0) {
+                    throw new ModelNotFoundException();
+                }
+
+                $item['item']->quantity = $item['item']->quantity - $item['quantity'];
+                $item['item']->is_coming_soon = $item['item']->quantity == 0;
+                unset($item['item']->price);
+                $item['item']->save();
+            }
+
+            $order = Order::create([
+                'customer_info' => json_encode($customer),
+                'code' => Order::getRandomUniqueCode(),
+                'total' => $cart['total']
+            ]);
+            $order->orderDetails()->createMany($orderDetail);
 
 
-        return view('checkout.success', [
-            'order' => $order
-        ]);
-        // } catch (\Throwable $th) {
-        //     DB::rollBack();
-        // }
+            DB::commit();
+            Mail::to('giangtuan6199@gmail.com')->send(new OrderSuccessMail(['cart' => $cart, 'customer' => $customer, 'code' => $order->code]));
+            session()->forget('cart');
+
+
+            return view('checkout.success', [
+                'order' => $order
+            ]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+        }
 
         return view('checkout.fail');
     }

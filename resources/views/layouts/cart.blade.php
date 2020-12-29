@@ -26,6 +26,6 @@ $cart = session('cart');
   </div>
   <ul class="cart-button-wrap">
     <li><a href="{{ route('cart') }}">View cart</a></li>
-    <li><a href="checkout.html">Checkout</a></li>
+    <li><a href="{{ route('checkout') }}">Checkout</a></li>
   </ul>
 </div>
