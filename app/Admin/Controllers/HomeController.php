@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use Encore\Admin\Controllers\Dashboard;
 use Encore\Admin\Layout\Column;
 use Encore\Admin\Layout\Content;
@@ -12,23 +13,16 @@ class HomeController extends Controller
 {
     public function index(Content $content)
     {
+        $todayOrders = Order::whereDate('created_at', now())->get();
+        $monthOrders = Order::whereMonth('created_at', now())->get();
+
         return $content
             ->title('Dashboard')
             ->description('Description...')
             ->row(Dashboard::title())
-            ->row(function (Row $row) {
-
-                $row->column(4, function (Column $column) {
-                    $column->append(Dashboard::environment());
-                });
-
-                $row->column(4, function (Column $column) {
-                    $column->append(Dashboard::extensions());
-                });
-
-                $row->column(4, function (Column $column) {
-                    $column->append(Dashboard::dependencies());
-                });
-            });
+            ->view('admin.dashboard', [
+                'todayOrders' => $todayOrders,
+                'monthOrders' => $monthOrders,
+            ]);
     }
 }
