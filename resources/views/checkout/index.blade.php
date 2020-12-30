@@ -28,20 +28,22 @@
               <div class="row">
                 <div class="col-lg-12">
                   <div class="form-group">
-                    <input type="text" name="name" placeholder="Họ và tên" class="form-control" id="inputName" required>
+                    <input type="text" name="name" placeholder="Họ và tên" class="form-control" id="inputName"
+                      value="{{ old('name') }}" required>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <input type="email" name="email" placeholder="Email" class="form-control" id="inputEmail" required>
+                    <input type="email" name="email" placeholder="Email" class="form-control" id="inputEmail"
+                      value="{{ old('email') }}" required>
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <input type="tel" name="phone" placeholder="Số điện thoại" class="form-control" id="inputPhone"
-                      required>
+                    <input type="tel" name="phone" placeholder="Số điện thoại" class="form-control"
+                      value="{{ old('phone') }}" id="inputPhone" required>
                   </div>
                 </div>
               </div>
@@ -49,7 +51,7 @@
                 <div class="col-lg-12">
                   <div class="form-group">
                     <textarea name="address" placeholder="Địa chỉ" class="form-control" rows="5" id="inputAddress"
-                      minlength="10" required></textarea>
+                      minlength="10" required>{{ old('address') }}</textarea>
                   </div>
                 </div>
               </div>

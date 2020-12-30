@@ -67,25 +67,32 @@ jQuery.extend(jQuery.validator.messages, {
       }
     })
 
-    function addToCart(productId, quantity = 1) {
-      $.ajax({
+    async function addToCart(productId, quantity = 1) {
+      showLoadingProgress()
+      await $.ajax({
         type: 'post',
         url: 'api/add-to-cart',
         data: { productId, quantity },
         success(response) {
-          $.notify('Add to cart successfully', {
-            align: 'right',
-            verticalAlign: 'bottom',
-            type: 'success',
-          })
-          updateCart(response.cart)
+          setTimeout(() => {
+            $('.spinner-wrap').hide()
+            $.notify('Add to cart successfully', {
+              align: 'right',
+              verticalAlign: 'bottom',
+              type: 'success',
+            })
+            updateCart(response.cart)
+          }, 800)
         },
         error(error) {
-          $.notify(error.responseJSON.error, {
-            align: 'right',
-            verticalAlign: 'top',
-            type: 'danger',
-          })
+          setTimeout(() => {
+            $('.spinner-wrap').hide()
+            $.notify(error.responseJSON.error, {
+              align: 'right',
+              verticalAlign: 'top',
+              type: 'danger',
+            })
+          }, 800)
         },
       })
     }
@@ -124,12 +131,16 @@ jQuery.extend(jQuery.validator.messages, {
     }
 
     function subQuantityFromCart(productId) {
+      showLoadingProgress()
       $.ajax({
         type: 'post',
         url: 'api/sub-quantity',
         data: { productId },
         success(response) {
-          updateCart(response.cart)
+          setTimeout(() => {
+            hideLoadingProgress()
+            updateCart(response.cart)
+          }, 800)
         },
       })
     }
@@ -152,12 +163,15 @@ jQuery.extend(jQuery.validator.messages, {
       const productId = $('#modalQuantity').data('product-id')
       const quantity = $('#modalQuantity').val()
       await addToCart(productId, quantity)
-      $('#card-item-modal').modal('hide')
+      setTimeout(function() {
+        $('#card-item-modal').modal('hide')
+      }, 800)
     })
 
     $(document).on('click', '.close-cart', function() {
       const cartItem = $(this).closest('.cart-item')
       const productId = cartItem.find('.cart-item-descr').data('product-id')
+      $('.spinner-wrap').show()
 
       $.ajax({
         url: 'api/remove-from-cart',
@@ -166,8 +180,11 @@ jQuery.extend(jQuery.validator.messages, {
           productId,
         },
         success(response) {
-          cartItem.remove()
-          updateCart(response.cart)
+          setTimeout(() => {
+            $('.spinner-wrap').hide()
+            cartItem.remove()
+            updateCart(response.cart)
+          }, 800)
         },
       })
     })
@@ -217,20 +234,24 @@ jQuery.extend(jQuery.validator.messages, {
       if (count >= 1) {
         await subQuantityFromCart(productId)
 
-        const price = $(this)
-          .closest('.quantity-wrap')
-          .find('.item-quantity')
-          .data('price')
-        const totalPrice =
-          parseInt($('.cart-total-price').data('total-price')) - parseInt(price)
-        $('.cart-total-price').data('total-price', totalPrice)
-        $('.cart-total-price').text(
-          `${new Intl.NumberFormat().format(totalPrice)} VND`
-        )
+        setTimeout(() => {
+          const price = $(this)
+            .closest('.quantity-wrap')
+            .find('.item-quantity')
+            .data('price')
+          const totalPrice =
+            parseInt($('.cart-total-price').data('total-price')) -
+            parseInt(price)
+          $('.cart-total-price').data('total-price', totalPrice)
+          $('.cart-total-price').text(
+            `${new Intl.NumberFormat().format(totalPrice)} VND`
+          )
+          count = count < 1 ? 1 : count
+          $quantity.val(count)
+          $quantity.change()
+        }, 800)
       }
-      count = count < 1 ? 1 : count
-      $quantity.val(count)
-      $quantity.change()
+
       return false
     })
 
@@ -242,23 +263,26 @@ jQuery.extend(jQuery.validator.messages, {
 
       await addToCart(productId)
 
-      var $quantity = $(this)
-        .parent()
-        .find('input.item-quantity')
-      $quantity.val(parseInt($quantity.val()) + 1)
-      $quantity.change()
-      const price = $(this)
-        .closest('.quantity-wrap')
-        .find('.item-quantity')
-        .data('price')
+      setTimeout(() => {
+        var $quantity = $(this)
+          .parent()
+          .find('input.item-quantity')
+        $quantity.val(parseInt($quantity.val()) + 1)
+        $quantity.change()
+        const price = $(this)
+          .closest('.quantity-wrap')
+          .find('.item-quantity')
+          .data('price')
 
-      const totalPrice =
-        parseInt($('.cart-total-price').data('total-price')) + parseInt(price)
+        const totalPrice =
+          parseInt($('.cart-total-price').data('total-price')) + parseInt(price)
 
-      $('.cart-total-price').data('total-price', totalPrice)
-      $('.cart-total-price').text(
-        `${new Intl.NumberFormat().format(totalPrice)} VND`
-      )
+        $('.cart-total-price').data('total-price', totalPrice)
+        $('.cart-total-price').text(
+          `${new Intl.NumberFormat().format(totalPrice)} VND`
+        )
+      }, 800)
+
       return false
     })
 
@@ -686,9 +710,9 @@ jQuery.extend(jQuery.validator.messages, {
             cancel: 'Cancel',
             current: 'current step:',
             pagination: 'Pagination',
-            finish: 'Thanh toán',
-            next: 'Tiếp tục',
-            previous: 'Quay lại',
+            finish: 'Checkout',
+            next: 'Continue',
+            previous: 'Back',
             loading: 'Loading ...',
           },
           onStepChanging: function(event, currentIndex, newIndex) {
@@ -719,6 +743,7 @@ jQuery.extend(jQuery.validator.messages, {
             return form.valid()
           },
           onFinished: function(event, currentIndex) {
+            showLoadingProgress()
             $('#checkout_steps').submit()
           },
         })
@@ -732,6 +757,14 @@ jQuery.extend(jQuery.validator.messages, {
             },
           },
         })
+    }
+
+    function showLoadingProgress() {
+      $('.spinner-wrap').show()
+    }
+
+    function hideLoadingProgress() {
+      $('.spinner-wrap').hide()
     }
 
     //CALENDAR

@@ -40,24 +40,24 @@ Form::init(function (Form $form) {
     });
 });
 
-Show::init(function (Show $show) {
-    $show->panel()
-        ->tools(function ($tools) {
-            $tools->disableEdit();
-            $tools->disableDelete();
-        });
+// Show::init(function (Show $show) {
+//     $show->panel()
+//         ->tools(function ($tools) {
+//             $tools->disableEdit();
+//             $tools->disableDelete();
+//         });
 
-    // $show->tools(function (Show\Tools $tools) {
-    //     $tools->disableDelete();
-    //     // $tools->disableView();
-    //     $tools->disableList();
-    // });
-});
+//     // $show->tools(function (Show\Tools $tools) {
+//     //     $tools->disableDelete();
+//     //     // $tools->disableView();
+//     //     $tools->disableList();
+//     // });
+// });
 
-Grid::init(function (Grid $grid) {
-    $grid->disableCreateButton();
-    $grid->actions(function ($actions) {
-        $actions->disableDelete();
-        $actions->disableEdit();
-    });
-});
+// Grid::init(function (Grid $grid) {
+//     $grid->disableCreateButton();
+//     $grid->actions(function ($actions) {
+//         $actions->disableDelete();
+//         $actions->disableEdit();
+//     });
+// });

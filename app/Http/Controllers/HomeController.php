@@ -151,7 +151,7 @@ class HomeController extends Controller
 
 
             DB::commit();
-            Mail::to('giangtuan6199@gmail.com')->send(new OrderSuccessMail(['cart' => $cart, 'customer' => $customer, 'code' => $order->code]));
+            Mail::to($customer['email'])->send(new OrderSuccessMail(['cart' => $cart, 'customer' => $customer, 'code' => $order->code]));
             session()->forget('cart');
 
 

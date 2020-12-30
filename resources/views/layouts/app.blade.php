@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="css/all.css">
   <link rel="stylesheet" type="text/css" href="css/notify.css">
   <link rel="stylesheet" type="text/css" href="css/prettify.css">
+  <link rel="stylesheet" type="text/css" href="css/spinner.css">
 </head>
 
 <body>
@@ -24,6 +25,15 @@
   <main class="main full-height">
     @yield('content')
   </main>
+  <div class="spinner-wrap">
+
+    <div class="lds-ellipsis">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
   <!-- FOOTER -->
   @include('layouts.footer')
   <!-- SCROLL TOP -->
