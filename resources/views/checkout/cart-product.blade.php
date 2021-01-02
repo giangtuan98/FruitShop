@@ -2,9 +2,9 @@
   <table class="table checkout-table">
     <thead>
       <tr>
-        <th style="width: 50%;"><span class="checkout-heading">Sản phẩm</span></th>
-        <th style="width: 27%;" class="text-center"><span class="checkout-heading">Số lượng</span></th>
-        <th style="width: 23%;" class="text-right"><span class="checkout-heading">Tổng</span></th>
+        <th style="width: 50%;"><span class="checkout-heading">Product</span></th>
+        <th style="width: 27%;" class="text-center"><span class="checkout-heading">Quantity</span></th>
+        <th style="width: 23%;" class="text-right"><span class="checkout-heading">Total</span></th>
       </tr>
     </thead>
     <tbody>
@@ -25,7 +25,7 @@
     </tbody>
   </table>
   <div class="checkout-total">
-    <h3>Tổng tiền:</h3>
+    <h3>Total:</h3>
     <div class="checkout-total-price">{{ number_format($cart['total']) }} VND</div>
   </div>
 </div>

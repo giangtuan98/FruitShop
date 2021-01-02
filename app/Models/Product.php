@@ -108,4 +108,9 @@ class Product extends Model
 
         return $query;
     }
+
+    public function scopeIsSale($query)
+    {
+        $query->whereDate('promotion_start_date', '<=', now()->format('y-m-d'))->whereDate('promotion_end_date', '>=', now()->format('y-m-d'));
+    }
 }

@@ -111,86 +111,9 @@
     ]) --}}
   </section>
 
-  <section id="sale" class="section section-sale gap-up-2 gap-down-2">
-    <div class="heading">
-      <div class="heading-wrap">
-        <h2 class="heading-title">Special <b>offer</b></h2>
-        <h5 class="heading-subtitle">Sale</h5>
-      </div>
-    </div>
-    <div class="offer-wrap">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8">
-            <div class="offer">
-              <h3>Deal of the day</h3>
-              <div class="descr">
-                <p>Discount on lemons 50%. Lorem ipsum dolor sit amet, consectetur adipisicing elit or sit
-                  amet,
-                  consectetur</p>
-              </div>
-              <div class="offer-price">
-                <span><b>only</b> $9.99/lb</span>
-              </div>
-              <div class="offer-image-wrap">
-                <img src="img/lemons.jpg" alt="lemons">
-              </div>
-              <div class="timer">
-                <div class="countdown_timer">
-                </div>
-              </div>
-              <div class="button-wrap">
-                <a href="shop-single.html" class="btn btn-primary">Buy now</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="offer offer-sm">
-              <h3>Apples season</h3>
-              <div class="descr">
-                <p>Discount on apples 20% before the end of summer</p>
-              </div>
-              <div class="offer-price">
-                <span><b>only</b> $9.99/lb</span>
-              </div>
-              <div class="offer-image-wrap">
-                <img src="img/apples.png" alt="apples">
-              </div>
-              <div class="timer">
-                <div class="countdown_timer_sm">
-                </div>
-              </div>
-              <div class="button-wrap">
-                <a href="shop-single.html" class="btn btn-primary btn-sm">Buy now</a>
-              </div>
-            </div>
-            <div class="offer offer-sm">
-              <h3>Offer of the week</h3>
-              <div class="descr">
-                <p>Best price. Green beans 15% discount</p>
-              </div>
-              <div class="offer-price">
-                <span><b>only</b> $9.99/lb</span>
-              </div>
-              <div class="offer-image-wrap">
-                <img src="img/beens.png" alt="lemons">
-              </div>
-              <div class="timer">
-                <div class="countdown_timer_sm">
-                </div>
-              </div>
-              <div class="button-wrap">
-                <a href="shop-single.html" class="btn btn-primary btn-sm">Buy now</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="button-wrap">
-      <a href="sale.html" class="btn btn-white">View all offers</a>
-    </div>
-  </section>
+  @include('home._hot-deal', [
+  'dealOfTheDay' => $dealOfTheDay
+  ])
 
   <section id="comming_soon" class="section section-coming-soon patern">
     @include('.home._slide-product', [

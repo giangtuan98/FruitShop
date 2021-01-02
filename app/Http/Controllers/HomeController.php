@@ -43,12 +43,14 @@ class HomeController extends Controller
         $products = Product::inStock()->inRandomOrder()->limit('8')->with('category')->get();
         $hotProducts = $this->productRepository->hotProduct();
         $comingProducts = $this->productRepository->comingProduct();
+        $dealOfTheDay = Product::isSale()->inStock()->inRandomOrder()->take('3')->get();
         // dd($comingProducts);
 
         return view('home.index', [
             'products' => $products,
             'hotProducts' => $hotProducts,
             'comingProducts' => $comingProducts,
+            'dealOfTheDay' => $dealOfTheDay
         ]);
     }
 
@@ -143,7 +145,7 @@ class HomeController extends Controller
             }
 
             $order = Order::create([
-                'customer_info' => json_encode($customer),
+                'customer_info' => $customer,
                 'code' => Order::getRandomUniqueCode(),
                 'total' => $cart['total']
             ]);

@@ -597,9 +597,10 @@ jQuery.extend(jQuery.validator.messages, {
 
     // COUNTDOWN TIMER BIG
     if ($('.countdown_timer').length) {
+      let timer = $('#timerMain').data('countdown-time')
       $('.countdown_timer').ClassyCountdown({
         theme: 'white',
-        end: $.now() + 322800,
+        end: $.now() + timer,
         labelsOptions: {
           style:
             'display:block; font-size:10px; line-height: 1; margin-top:5px',
@@ -649,9 +650,15 @@ jQuery.extend(jQuery.validator.messages, {
 
     // COUNTDOWN TIMER SMALL
     if ($('.countdown_timer_sm').length) {
-      $('.countdown_timer_sm').ClassyCountdown({
+      $('.countdown_timer_sm').each(function() {
+        $(this).ClassyCountdown(classyCountdown($(this).data('countdown-time')))
+      })
+    }
+
+    function classyCountdown(time) {
+      return {
         theme: 'white',
-        end: $.now() + 322800,
+        end: $.now() + time,
         labelsOptions: {
           style: 'display:block; font-size:8px; line-height: 1; margin-top:5px',
         },
@@ -695,7 +702,7 @@ jQuery.extend(jQuery.validator.messages, {
               "font-family:'Lato'; font-size:200px; font-weight:900; color:#787878;",
           },
         },
-      })
+      }
     }
 
     // CHECKOUT STEPS

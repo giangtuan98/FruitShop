@@ -42,7 +42,17 @@ class OrderController extends AdminController
 
         $grid->filter(function ($filter) {
             $filter->like('code', 'code');
+            $filter->between('created_at', 'date')->date();
+
+            // $filter->group('created_at', function ($group) {
+            //     $group->gt('greater than');
+            //     $group->lt('less than');
+            //     $group->nlt('not less than');
+            //     $group->ngt('not greater than');
+            //     $group->equal('equal to');
+            // })->date();
         });
+
 
         return $grid;
     }

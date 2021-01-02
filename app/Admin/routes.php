@@ -16,8 +16,9 @@ Route::group([
     // $router->resource('products', ProductController::class);
     $router->resource('/products', ProductController::class)->except([]);
     // $router->post('/products', [App\Admin\Controllers\ProductController::class, 'storeProduct'])->name('products.store');
-    $router->resource('categories', CategoryController::class);
+    $router->resource('categories', CategoryController::class)->except([]);
 
-    $router->get('orders', [OrderController::class, 'index']);
-    $router->get('orders/{id}', [OrderController::class, 'show']);
+    $router->get('orders', [OrderController::class, 'index'])->name('orders.index');
+
+    $router->get('orders/{id}', [OrderController::class, 'show'])->name('orders.detail');
 });
