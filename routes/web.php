@@ -25,6 +25,7 @@ Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/cart', [HomeController::class, 'cart'])->name('cart');
 Route::get('/checkout', [HomeController::class, 'getCheckout'])->name('checkout');
 Route::post('/checkout', [HomeController::class, 'checkout']);
+Route::get('/contact', [HomeController::class, 'contact'])->name('contacts');
 Route::get('/test', [HomeController::class, 'testEmail']);
 Route::post('api/add-to-cart', [CartController::class, 'addToCart']);
 Route::post('api/update-cart', [CartController::class, 'updateCart'])->name('update-cart');

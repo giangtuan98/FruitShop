@@ -17,11 +17,9 @@
           <div class="usefulness-descr">
             <h3>Organic</h3>
             <div class="descr">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                incididunt ut
-                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.</p>
+              <p>Organic foods often have more beneficial nutrients, such as antioxidants, than their
+                conventionally-grown counterparts and people with allergies to foods, chemicals, or preservatives may
+                find their symptoms lessen or go away when they eat only organic foods.</p>
             </div>
             <div class="container">
               <div class="row">
@@ -30,17 +28,16 @@
               </div>
             </div>
             <ul class="row">
-              <li class="col-xl-4 col-lg-5 col-md-4"><i class="icon-leaf"></i><span>Duis aute irure
-                  dolor</span>
+              <li class="col-xl-4 col-lg-5 col-md-4"><i class="icon-leaf"></i><span>
+                  Less pesticide</span>
               </li>
-              <li class="col-xl-4 col-lg-5 col-md-4"><i class="icon-leaf"></i><span>Quis nostrud</span>
               </li>
-              <li class="col-xl-4 col-lg-5 col-md-4"><i class="icon-leaf"></i><span>Ut enim ad
-                  minim</span></li>
-              <li class="col-xl-4 col-lg-5 col-md-4"><i class="icon-leaf"></i><span>Nisi ut aliquip</span>
+              <li class="col-xl-4 col-lg-5 col-md-4"><i class="icon-leaf"></i><span>NOT given antibiotics</span>
               </li>
-              <li class="col-xl-4 col-lg-5 col-md-4"><i class="icon-leaf"></i><span>Sed do eiusmod</span>
+              <li class="col-xl-6 col-lg-6 col-md-6"><i class="icon-leaf"></i><span>Better for the environment</span>
               </li>
+
+
             </ul>
           </div>
         </div>
@@ -57,24 +54,15 @@
           <div class="usefulness-descr text-lg-right">
             <h3>Tasty</h3>
             <div class="descr">
-              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla
-                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                deserunt mollit
-                anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium
-                doloremque laudantium, totam rem aperiam.</p>
+              <p>Organic food is often fresher because it doesn’t contain preservatives that make it last longer.
+                Organic produce is sometimes (but not always, so watch where it is from) produced on smaller farms
+                nearer to where it is sold.</p>
             </div>
             <ul class="row justify-content-lg-end text-left">
-              <li class="col-xl-4 col-lg-5 col-md-4"><i class="icon-apple"></i><span>Ut enim ad
-                  minim</span></li>
-              <li class="col-xl-4 col-lg-5 col-md-4"><i class="icon-apple"></i><span>Duis aute irure
-                  dolor</span>
+              <li class="col-xl-4 col-lg-5 col-md-4"><i class="icon-apple"></i><span>Fresher</span>
+
+              <li class="col-xl-4 col-lg-5 col-md-4"><i class="icon-apple"></i><span>Richer nutrients</span>
               </li>
-              <li class="col-xl-4 col-lg-5 col-md-4"><i class="icon-apple"></i><span>Ut enim ad
-                  minim</span></li>
-              <li class="col-xl-4 col-lg-5 col-md-4"><i class="icon-apple"></i><span>Nisi ut
-                  aliquip</span></li>
             </ul>
           </div>
         </div>
@@ -91,25 +79,11 @@
           <div class="usefulness-descr">
             <h3>Healthy</h3>
             <div class="descr">
-              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla
-                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa.</p>
+              <p> Organic farming practices may reduce pollution, conserve water, reduce soil erosion, increase soil
+                fertility, and use less energy. Farming without synthetic pesticides is also better for nearby birds and
+                animals as well as people who live close to farms.</p>
             </div>
-            <ul class="row">
-              <li class="col-xl-4 col-lg-5 col-md-4"><i class="icon-carrot"></i><span>Duis aute irure
-                  dolor</span>
-              </li>
-              <li class="col-xl-4 col-lg-5 col-md-4"><i class="icon-carrot"></i><span>Quis nostrud</span>
-              </li>
-              <li class="col-xl-4 col-lg-5 col-md-4"><i class="icon-carrot"></i><span>Ut enim ad
-                  minim</span></li>
-              <li class="col-xl-4 col-lg-5 col-md-4"><i class="icon-carrot"></i><span>Nisi ut
-                  aliquip</span></li>
-              <li class="col-xl-4 col-lg-5 col-md-4"><i class="icon-carrot"></i><span>Sed do
-                  eiusmod</span></li>
-              <li class="col-xl-4 col-lg-5 col-md-4"><i class="icon-carrot"></i><span>Occaecat
-                  cupidatat</span></li>
-            </ul>
+
           </div>
         </div>
       </div>

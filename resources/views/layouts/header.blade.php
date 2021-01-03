@@ -23,10 +23,7 @@ $totalPrice = isset($cart['total']) ? number_format($cart['total']) : 0;
             <a class="nav-link menu-nav-link" href="{{ route('about') }}">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link menu-nav-link" href="#sale">Sale</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link menu-nav-link" href="#contacts">Contacts</a>
+            <a class="nav-link menu-nav-link" href="{{ route('contacts') }}">Contacts</a>
           </li>
           <li class="nav-item d-none d-lg-block">
             <a class="nav-link menu-nav-link" href="javascript:void(0);" id="search"><i class="icon-search"></i></a>

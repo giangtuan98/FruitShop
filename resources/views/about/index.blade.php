@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('header')
-@include('layouts.header')
+  @include('layouts.header')
 @endsection
 
 
 @section('content')
-<main class="main">
+  <main class="main">
     <!-- SECTION TOP -->
     <section class="section section-top patern gap-up-1-top">
       <div class="container text-center">
@@ -18,9 +18,7 @@
       </div>
     </section>
     <!-- SECTION ABOUT US -->
-    <section
-      class="section section-about-us section-about-us-inner gap-down-1"
-    >
+    <section class="section section-about-us section-about-us-inner gap-down-1">
       <div class="container">
         <div class="heading">
           <div class="heading-wrap">
@@ -33,16 +31,9 @@
             <div class="col-md-6">
               <div class="about-item -inner">
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                  sed do eiusmod tempor incididunt ut labore et dolore magna
-                  aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                  ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                  Duis aute irure dolor in reprehenderit in voluptate velit
-                  esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                  occaecat cupidatat non proident, sunt in culpa qui officia
-                  deserunt mollit anim id est laborum. Lorem ipsum dolor sit
-                  amet, consectetur adipisicing elit, sed do eiusmod tempor
-                  incididunt ut labore et dolore magna aliqua.
+                  Our team of food scientists are on-hand to answer questions about shelf life, stability, particle size,
+                  organic accreditation, acidity level, extraction process, dietary consideration or any one of hundreds
+                  of criteria which are relevant to our ingredients, and your finished product.
                 </p>
               </div>
             </div>
@@ -50,12 +41,11 @@
           <div class="row justify-content-end">
             <div class="col-md-4">
               <div class="about-item -inner">
-                <h4>Natural</h4>
+                <h4>The ingredients</h4>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                  sed do eiusmod tempor incididunt ut labore et dolore magna
-                  aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                  ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  Our diverse ingredients catalogue spans over 5,000 SKUs so we have many parts of your bill of materials
+                  covered. We recommend ingredients which match your enquiry and we also create bespoke ingredients to
+                  meet project aims such as adapting mouthfeel, optimising cost or enhancing nutrition.
                 </p>
               </div>
             </div>
@@ -63,12 +53,11 @@
           <div class="row justify-content-center">
             <div class="col-md-4">
               <div class="about-item -inner">
-                <h4>Organic</h4>
+                <h4>Technical advice</h4>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                  sed do eiusmod tempor incididunt ut labore et dolore magna
-                  aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                  ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  Our team of food scientists are on-hand to answer questions about shelf life, stability, particle size,
+                  organic accreditation, acidity level, extraction process, dietary consideration or any one of hundreds
+                  of criteria which are relevant to our ingredients, and your finished product.
                 </p>
               </div>
             </div>
@@ -76,12 +65,12 @@
           <div class="row justify-content-end">
             <div class="col-md-4">
               <div class="about-item -inner">
-                <h4>Natural</h4>
+                <h4>Experience</h4>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                  sed do eiusmod tempor incididunt ut labore et dolore magna
-                  aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                  ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  Today Kanegrade encompasses facilities in 5 countries and over 60 staff across production contracting,
+                  sourcing, QA, NPD, sales and logistics departments. We’ve built strong strategic partnerships with
+                  growers and primary processors around the World, giving you access to ingredients from every corner of
+                  the globe.
                 </p>
               </div>
             </div>
@@ -89,12 +78,11 @@
           <div class="row justify-content-center">
             <div class="col-md-4">
               <div class="about-item -inner">
-                <h4>Organic</h4>
+                <h4>On-time</h4>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                  sed do eiusmod tempor incididunt ut labore et dolore magna
-                  aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                  ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  We hold thousands of items in stock ensuring constant availability and just-in-time delivery. Our
+                  network of storage facilities and distribution expertise mean you get ingredients transported to your
+                  manufacturing site (on the Incoterms of your choice) exactly when you specify, ready for production.
                 </p>
               </div>
             </div>
@@ -178,9 +166,7 @@
       </div>
     </section>
     <!-- SECTION USEFULNESS -->
-    <section
-      class="section section-usefulness section-usefullnes-inner gap-up-1 gap-down-1"
-    >
+    <section class="section section-usefulness section-usefullnes-inner gap-up-1 gap-down-1">
       <div class="container">
         <div class="heading">
           <div class="heading-wrap">
@@ -205,8 +191,7 @@
                 </div>
                 <ul class="row justify-content-xl-end text-left">
                   <li class="col-md-6">
-                    <i class="icon-leaf"></i
-                    ><span>Duis aute irure dolor</span>
+                    <i class="icon-leaf"></i><span>Duis aute irure dolor</span>
                   </li>
                   <li class="col-md-6">
                     <i class="icon-leaf"></i><span>Quis nostrud</span>
@@ -244,8 +229,7 @@
                     <i class="icon-apple"></i><span>Ut enim ad minim</span>
                   </li>
                   <li class="col-md-6">
-                    <i class="icon-apple"></i
-                    ><span>Duis aute irure dolor</span>
+                    <i class="icon-apple"></i><span>Duis aute irure dolor</span>
                   </li>
                   <li class="col-md-6">
                     <i class="icon-apple"></i><span>Ut enim ad minim</span>
@@ -274,8 +258,7 @@
                 </div>
                 <ul class="row justify-content-xl-end text-left">
                   <li class="col-md-6">
-                    <i class="icon-carrot"></i
-                    ><span>Duis aute irure dolor</span>
+                    <i class="icon-carrot"></i><span>Duis aute irure dolor</span>
                   </li>
                   <li class="col-md-6">
                     <i class="icon-carrot"></i><span>Quis nostrud</span>
@@ -300,9 +283,7 @@
       </div>
     </section>
     <!-- SECTION TESTIMONIALS -->
-    <section
-      class="section section-testimonials section-testimonials-inner patern"
-    >
+    <section class="section section-testimonials section-testimonials-inner patern">
       <div class="container">
         <div class="heading">
           <div class="heading-wrap">
@@ -438,36 +419,32 @@
           <div class="row justify-content-center">
             <div class=" col-lg-2 col-md-4 col-6">
               <div class="partners-img-wrap">
-                <a href="#?"><img src="img/hipster.png" alt="hipster"/></a>
+                <a href="#?"><img src="img/hipster.png" alt="hipster" /></a>
               </div>
             </div>
             <div class=" col-lg-2 col-md-4 col-6">
               <div class="partners-img-wrap">
-                <a href="#?"><img src="img/vintage.png" alt="vintage"/></a>
+                <a href="#?"><img src="img/vintage.png" alt="vintage" /></a>
               </div>
             </div>
             <div class=" col-lg-2 col-md-4 col-6">
               <div class="partners-img-wrap">
-                <a href="#?"><img src="img/retro.png" alt="retro"/></a>
+                <a href="#?"><img src="img/retro.png" alt="retro" /></a>
               </div>
             </div>
             <div class=" col-lg-2 col-md-4 col-6">
               <div class="partners-img-wrap">
-                <a href="#?"
-                  ><img src="img/creatives.png" alt="creatives"
-                /></a>
+                <a href="#?"><img src="img/creatives.png" alt="creatives" /></a>
               </div>
             </div>
             <div class=" col-lg-2 col-md-4 col-6">
               <div class="partners-img-wrap">
-                <a href="#?"><img src="img/vintage-97.png" alt="vintage"/></a>
+                <a href="#?"><img src="img/vintage-97.png" alt="vintage" /></a>
               </div>
             </div>
             <div class=" col-lg-2 col-md-4 col-6">
               <div class="partners-img-wrap">
-                <a href="#?"
-                  ><img src="img/creatives-design.png" alt="creatives-design"
-                /></a>
+                <a href="#?"><img src="img/creatives-design.png" alt="creatives-design" /></a>
               </div>
             </div>
           </div>

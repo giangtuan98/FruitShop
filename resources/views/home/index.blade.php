@@ -23,8 +23,8 @@
             </div>
           </div>
           <div class="button-welcome-wrap">
-            <a href="shop.html" class="btn btn-primary">Buy now</a>
-            <a href="about.html" class="btn btn-border">About us</a>
+            <a href="{{ route('shop') }}" class=" btn btn-primary">Buy now</a>
+            <a href="{{ route('about') }}" class=" btn btn-border">About us</a>
           </div>
         </div>
       </div>
@@ -37,7 +37,7 @@
               </div>
               <div class="advantages-item-descr">
                 <h4>Working time 24/7</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing</p>
+                <p>Working 24/7 all day of the week</p>
               </div>
             </div>
           </div>
@@ -48,7 +48,7 @@
               </div>
               <div class="advantages-item-descr">
                 <h4>Free shipping</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing</p>
+                <p>Coverage covers 63 cities and provinces</p>
               </div>
             </div>
           </div>
@@ -59,7 +59,8 @@
               </div>
               <div class="advantages-item-descr">
                 <h4>Delivery to the door</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing</p>
+                <p>
+                  Professional import, transport and storage process.</p>
               </div>
             </div>
           </div>
@@ -70,7 +71,7 @@
               </div>
               <div class="advantages-item-descr">
                 <h4>Free return</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing</p>
+                <p>Free exchange if the product does not meet the standard</p>
               </div>
             </div>
           </div>

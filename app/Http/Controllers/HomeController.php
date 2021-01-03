@@ -166,4 +166,9 @@ class HomeController extends Controller
 
         return view('checkout.fail');
     }
+
+    public function contact()
+    {
+        return view('contacts.index');
+    }
 }
