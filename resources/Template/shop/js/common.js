@@ -108,24 +108,24 @@ jQuery.extend(jQuery.validator.messages, {
       $.each(items, (i, n) => {
         $('.cart-items').append(
           `<div class="cart-item">
-                                  <div class="cart-item-img-wrap">
-                                    <img src="/storage/${
-                                      items[i].item.image
-                                    }" alt="cart">
-                                  </div>
-                                  <div class="cart-item-descr" data-product-id=${
-                                    items[i].item.id
-                                  }>
-                                    <h5>${items[i].item.name}</h5>
-                                    <span>${
-                                      items[i].quantity
-                                    } X ${new Intl.NumberFormat().format(
+                                    <div class="cart-item-img-wrap">
+                                      <img src="/storage/${
+                                        items[i].item.image
+                                      }" alt="cart">
+                                    </div>
+                                    <div class="cart-item-descr" data-product-id=${
+                                      items[i].item.id
+                                    }>
+                                      <h5>${items[i].item.name}</h5>
+                                      <span>${
+                                        items[i].quantity
+                                      } X ${new Intl.NumberFormat().format(
             items[i].item.price
           )} VND</span>
-                                  </div>
-                                  <div class="close-btn close-cart">
-                                  </div>
-                                </div>`
+                                    </div>
+                                    <div class="close-btn close-cart">
+                                    </div>
+                                  </div>`
         )
       })
     }
@@ -494,23 +494,23 @@ jQuery.extend(jQuery.validator.messages, {
 
           product.images.forEach(item => {
             $('#modalSlideProductImage').append(`
-              <div class="card-item-modal-slider-for-item">
-                    <div class="slider-for-img-wrap">
-                      <img src="/storage/${item.url}" alt="slider">
-                      <ul class="label">
-                        <li class="label-new">new</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                    `)
-            $('#modalSliderNav').append(`
-                    <div class="card-item-modal-slider-nav-item">
-                      <div class="slider-nav-img-wrap">
-                        <img src="/storage/${item.url}" alt="face">
+                <div class="card-item-modal-slider-for-item">
+                      <div class="slider-for-img-wrap">
+                        <img src="/storage/${item.url}" alt="slider">
+                        <ul class="label">
+                          <li class="label-new">new</li>
+                        </ul>
                       </div>
                     </div>
-                    `)
+
+                      `)
+            $('#modalSliderNav').append(`
+                      <div class="card-item-modal-slider-nav-item">
+                        <div class="slider-nav-img-wrap">
+                          <img src="/storage/${item.url}" alt="face">
+                        </div>
+                      </div>
+                      `)
           })
           $('#modalProductName').text(product.name)
           $('#modalProductCategory').text(product.category.name)
@@ -796,5 +796,87 @@ jQuery.extend(jQuery.validator.messages, {
         icon: 'img/map-marker.png',
       })
     }
+
+    $('#subscribe').on('submit', function(e) {
+      e.preventDefault()
+      $('#subscribeEmail').val()
+      if (!$('#subscribeEmail').val()) {
+        return
+      }
+
+      showLoadingProgress()
+
+      $.ajax({
+        url: '/subscribe',
+        method: 'POST',
+        data: {
+          email: $('#subscribeEmail').val(),
+        },
+        success(response) {
+          setTimeout(() => {
+            $('.spinner-wrap').hide()
+            $.notify(response.msg, {
+              align: 'right',
+              verticalAlign: 'top',
+              type: 'success',
+            })
+          }, 800)
+        },
+        error(error) {
+          setTimeout(() => {
+            $('.spinner-wrap').hide()
+            $.notify(error.responseJSON.msg, {
+              align: 'right',
+              verticalAlign: 'top',
+              type: 'danger',
+            })
+          }, 800)
+        },
+      })
+    })
+
+    $('#frmQuestion').submit(function(e) {
+      e.preventDefault()
+
+      if (
+        !$('#contactName').val() ||
+        !$('#contactEmail').val() ||
+        !$('#contactMessage').val()
+      ) {
+        return
+      }
+
+      showLoadingProgress()
+
+      $.ajax({
+        url: '/question',
+        method: 'POST',
+        data: {
+          name: $('#contactName').val(),
+          email: $('#contactEmail').val(),
+          message: $('#contactMessage').val(),
+        },
+        success(response) {
+          setTimeout(() => {
+            $('.spinner-wrap').hide()
+            $.notify(response.msg, {
+              align: 'right',
+              verticalAlign: 'top',
+              type: 'success',
+            })
+          }, 800)
+        },
+        error(error) {
+          setTimeout(() => {
+            $('.spinner-wrap').hide()
+            $.notify(error.responseJSON.msg, {
+              align: 'right',
+              verticalAlign: 'top',
+              type: 'danger',
+            })
+          }, 800)
+        },
+      })
+    })
   })
 })(jQuery)

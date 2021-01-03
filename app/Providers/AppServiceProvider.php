@@ -36,6 +36,6 @@ class AppServiceProvider extends ServiceProvider
 
         View::share('cart', $cart);
 
-        // Product::observe(ProductObserver::class);
+        Product::observe(ProductObserver::class);
     }
 }

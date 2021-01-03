@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CheckoutRequest;
+use App\Mail\NewProductNotify;
 use App\Mail\OrderSuccessMail;
+use App\Mail\Question;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Subscriber;
 use App\Repositories\Contracts\OrderRepositoryInterface;
 use App\Repositories\Contracts\ProductRepositoryInterface;
 use App\Repositories\Eloquents\CategoryRepository;
@@ -170,5 +173,53 @@ class HomeController extends Controller
     public function contact()
     {
         return view('contacts.index');
+    }
+
+    public function subscribe(Request $request)
+    {
+        $email = $request->email;
+        $check = Subscriber::where('email', $email)->count();
+
+        if ($check > 0) {
+            return response([
+                'msg' => 'This email has been subscribed'
+            ], 422);
+        }
+        try {
+            Subscriber::create([
+                'email' => $email
+            ]);
+            return response([
+                'msg' => 'Subscribe successfully'
+            ], 200);
+        } catch (\Throwable $th) {
+            return response([
+                'msg' => 'Subscribe fail, Please try again'
+            ], 500);
+        }
+    }
+
+    public function testEmail()
+    {
+        Mail::to(['giangtuan6199@gmail.com', 'giangtuan6199+1@gmail.com'])->send(new NewProductNotify(['name' => 'nhãn']));
+    }
+
+    public function question(Request $request)
+    {
+        try {
+            Mail::to('nhaxegiangtuan@gmail.com')->send(new Question([
+                'name' => $request->name,
+                'email' => $request->email,
+                'message' => $request->message,
+            ]));
+        } catch (\Throwable $th) {
+            return response([
+                'msg' => 'Send question fail'
+            ], 500);
+        }
+
+        return response([
+            'msg' => 'Send question successfully'
+        ], 200);
     }
 }

@@ -2,7 +2,10 @@
 
 namespace App\Observers;
 
+use App\Mail\NewProductNotify;
 use App\Models\Product;
+use App\Models\Subscriber;
+use Illuminate\Support\Facades\Mail;
 
 class ProductObserver
 {
@@ -14,7 +17,10 @@ class ProductObserver
      */
     public function created(Product $product)
     {
-        //
+        $to = Subscriber::all()->pluck('email')->toArray();
+        if ($to) {
+            Mail::to($to)->send(new NewProductNotify(['name' => $product->name]));
+        }
     }
 
     public function updating(Product $product)
@@ -28,7 +34,6 @@ class ProductObserver
      */
     public function updated(Product $product)
     {
-        //
     }
 
     /**

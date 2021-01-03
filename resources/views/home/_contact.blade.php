@@ -33,21 +33,21 @@
         <div class="col-lg-5">
           <div class="contact-form">
             <h3 class="d-lg-none">Send us a message</h3>
-            <form>
+            <form id="frmQuestion">
               <div class="form-row">
                 <div class="form-group col-lg-12 ml-auto">
-                  <input type="text" class="form-control contact-form-item" id="contact-name" placeholder="Name"
+                  <input type="text" class="form-control contact-form-item" id="contactName" placeholder="Name"
                     required>
                 </div>
                 <div class="form-group col-lg-12 ml-auto">
-                  <input type="email" class="form-control contact-form-item" id="contact-email" placeholder="E-mail"
+                  <input type="email" class="form-control contact-form-item" id="contactEmail" placeholder="E-mail"
                     required>
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-lg-12 ml-auto">
-                  <textarea placeholder="Write a message" class="form-control contact-form-item" id="Message" rows="8"
-                    required></textarea>
+                  <textarea placeholder="Write a message" class="form-control contact-form-item" id="contactMessage"
+                    rows="8" required></textarea>
                 </div>
               </div>
               <div class="contact-btn">
@@ -65,8 +65,8 @@
           <p>Get all the news from our store</p>
         </div>
         <div class="subscribe-form">
-          <form action="#">
-            <input type="email" placeholder="Email">
+          <form id="subscribe">
+            <input type="email" placeholder="Email" id="subscribeEmail">
             <input type="submit" value="Subscribe" class="btn btn-primary">
           </form>
         </div>
