@@ -33,7 +33,9 @@ $totalPrice = isset($cart['total']) ? number_format($cart['total']) : 0;
                 class="icon-cart cart-header-price"> {{ $totalPrice }} VND</i></a>
           </li>
           <li class="nav-item d-lg-none">
-            <a class="nav-link menu-nav-link" href="cart.html"><i class="icon-cart"> {{ $totalPrice }} VND</i></a>
+            <a class="nav-link menu-nav-link" href="{{ route('cart') }}"><i class="icon-cart cart-header-price">
+                {{ $totalPrice }}
+                VND</i></a>
           </li>
           <li class="nav-item d-lg-none">
             <div class="search-form search-form-inline">
