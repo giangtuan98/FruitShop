@@ -821,6 +821,7 @@ jQuery.extend(jQuery.validator.messages, {
               type: 'success',
             })
           }, 800)
+          $('#subscribeEmail').val('')
         },
         error(error) {
           setTimeout(() => {
@@ -864,6 +865,9 @@ jQuery.extend(jQuery.validator.messages, {
               verticalAlign: 'top',
               type: 'success',
             })
+            $('#contactName').val('')
+            $('#contactEmail').val('')
+            $('#contactMessage').val('')
           }, 800)
         },
         error(error) {
